@@ -1,7 +1,7 @@
 <?php
 require_once 'Model/pdo.php';
 
-$sqlManga = $dbPDO->prepare("SELECT titre, annee_publi FROM manga ORDER BY annee_publi DESC");
+$sqlManga = $dbPDO->prepare("SELECT id, titre, annee_publi FROM manga ORDER BY annee_publi DESC");
 $sqlManga->execute();
 $resManga = $sqlManga->fetchAll();
 
@@ -11,8 +11,10 @@ $resManga = $sqlManga->fetchAll();
     <h1>Top manga :</h1>
     <ul>
         <?php foreach ($resManga as $manga): ?>
-            <li><u><?php echo $manga['titre'];?></u><br>
-            <?php echo $manga['annee_publi']; ?></li>    
+            <li>
+                <a href="Views/manga.php?id=<?php echo $manga['id']; ?>"><?php echo $manga['titre']; ?></a><br>
+                <?php echo $manga['annee_publi']; ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 </body>
