@@ -17,3 +17,4 @@ $personnages = $sqlPersonnages->fetch();
     <p><?php echo $personnages['description']; ?></p><br>
 
     <a href="../index.php">Retour vers page d'accueil</a>
+</body>
