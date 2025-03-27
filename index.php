@@ -13,7 +13,7 @@ $resManga = $sqlManga->fetchAll();
         <?php foreach ($resManga as $manga): ?>
             <li>
                 <a href="Views/manga.php?id=<?php echo $manga['id']; ?>"><?php echo $manga['titre']; ?></a><br>
-                <?php echo $manga['annee_publi']; ?>
+                <p><?php echo $manga['annee_publi']; ?></p>
             </li>
         <?php endforeach; ?>
     </ul>

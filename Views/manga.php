@@ -8,7 +8,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 $id = $_GET['id'];
 
 $sql = $dbPDO->prepare("SELECT manga.titre AS manga_titre, manga.note AS manga_note, manga.description AS manga_descri,
-    auteur.nom AS auteur_nom, auteur.date_naissance AS auteur_naissance, personnage.nom AS personnage_nom
+    auteur.nom AS auteur_nom, auteur.date_naissance AS auteur_naissance, personnage.nom AS personnage_nom, personnage.id AS personnage_id
     FROM manga
     JOIN auteur ON manga.id_auteur = auteur.id
     JOIN personnage ON manga.id = personnage.id_manga
@@ -24,12 +24,13 @@ $manga = $sql->fetch();
     <h2>Personnages :</h2>
     <ul>
         <?php
-        $sqlPersonnages = $dbPDO->prepare("SELECT nom FROM personnage WHERE id_manga = :id");
+        $sqlPersonnages = $dbPDO->prepare("SELECT id, nom FROM personnage WHERE id_manga = :id");
         $sqlPersonnages->execute(['id' => $id]);
         $personnages = $sqlPersonnages->fetchAll();
 
         foreach ($personnages as $personnage) {
-            echo '<li>' . $personnage['nom'] . '</li>';
+
+            echo '<li><a href="personnage.php?id=' . $personnage['id'] . '">' . $personnage['nom'] . '</a></li>';
         }
         ?>
     </ul>
